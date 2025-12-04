@@ -63,7 +63,7 @@ export default async function Home() {
               href={`/article/${article.id}`}
               className="text-blue-600 hover:underline mt-4 inline-block"
             >
-              Leer más →
+              Leer más... →
             </Link>
           </article>
         ))}
