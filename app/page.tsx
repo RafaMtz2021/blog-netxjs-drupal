@@ -36,7 +36,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Mi Blog con Next.js + Drupal.</h1>
+      <h1 className="text-4xl font-bold mb-8">Mi Blog con Next.js + Drupal</h1>
       
       <div className="space-y-6">
         {articles.map((article) => (
