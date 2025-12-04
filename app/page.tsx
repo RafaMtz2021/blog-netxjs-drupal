@@ -15,12 +15,7 @@ interface Article {
 async function getArticles() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/node/article`,
-    { 
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-      }
-    }
+    { cache: 'force-cache' }  // Cambiado
   );
   
   if (!res.ok) {
@@ -36,7 +31,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Mi Blog con Next.js + Drupal.</h1>
+      <h1 className="text-4xl font-bold mb-8">Mi Blog con Next.js + Drupal</h1>
       
       <div className="space-y-6">
         {articles.map((article) => (

@@ -11,23 +11,31 @@ interface Article {
   };
 }
 
+async function getArticles() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/node/article`,
+    { cache: 'force-cache' }  // Cambiado: forzar cache para static export
+  );
+  const data = await res.json();
+  return data.data as Article[];
+}
+
 async function getArticle(id: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/node/article/${id}`,
-    { 
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-      }
-    }
+    { cache: 'force-cache' }  // Cambiado: forzar cache para static export
   );
-  
-  if (!res.ok) {
-    throw new Error('Failed to fetch article');
-  }
-  
   const data = await res.json();
   return data.data as Article;
+}
+
+// Generar paths estáticos
+export async function generateStaticParams() {
+  const articles = await getArticles();
+  
+  return articles.map((article) => ({
+    id: article.id,
+  }));
 }
 
 export default async function ArticlePage({ 
@@ -35,7 +43,6 @@ export default async function ArticlePage({
 }: { 
   params: Promise<{ id: string }> 
 }) {
-  // Await params antes de usarlo
   const { id } = await params;
   const article = await getArticle(id);
 
