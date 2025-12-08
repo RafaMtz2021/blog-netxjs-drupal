@@ -5,9 +5,12 @@ import articlesReducer from './slices/articlesSlice'
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      articles: articlesReducer,  // ← Nuestro slice de artículos
+      articles: articlesReducer,  // ← Slice de artículos
     },
-    devTools: process.env.NODE_ENV !== 'production',  // Habilita Redux DevTools
+    // Redux DevTools habilitado en producción para fines educativos.
+    // En un proyecto real con datos sensibles, usar:
+    // devTools: process.env.NODE_ENV !== 'production'
+    devTools: true,
   })
 }
 
