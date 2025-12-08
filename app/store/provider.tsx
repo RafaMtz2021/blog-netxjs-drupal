@@ -10,13 +10,13 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode
 }) {
-  const storeRef = useRef<AppStore>()
+  // Inicializar con undefined explícitamente
+  const storeRef = useRef<AppStore | undefined>(undefined)
   
   if (!storeRef.current) {
     storeRef.current = makeStore()
     storeRef.current.dispatch(fetchArticles())
   }
 
-  // Non-null assertion operator (!) le dice a TypeScript que confíe
-  return <Provider store={storeRef.current!}>{children}</Provider>
+  return <Provider store={storeRef.current}>{children}</Provider>
 }
