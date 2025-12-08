@@ -9,7 +9,7 @@ export const makeStore = () => {
     },
     // Redux DevTools habilitado en producción para fines educativos.
     // En un proyecto real con datos sensibles, usar:
-    // devTools: process.env.NODE_ENV !== 'production' 
+    // devTools: process.env.NODE_ENV !== 'production'
     devTools: true,
   })
 }
