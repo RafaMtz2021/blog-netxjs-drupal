@@ -1,4 +1,4 @@
-'use client'  // ← IMPORTANTE: Esto es un Client Component
+'use client'
 
 import { useRef } from 'react'
 import { Provider } from 'react-redux'
@@ -10,16 +10,13 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode
 }) {
-  // useRef para mantener el mismo store en re-renders
   const storeRef = useRef<AppStore>()
   
-  // Crear el store SOLO la primera vez
   if (!storeRef.current) {
     storeRef.current = makeStore()
-    
-    // Pre-cargar artículos automáticamente al iniciar la app
     storeRef.current.dispatch(fetchArticles())
   }
 
-  return <Provider store={storeRef.current}>{children}</Provider>
+  // Non-null assertion operator (!) le dice a TypeScript que confíe
+  return <Provider store={storeRef.current!}>{children}</Provider>
 }
