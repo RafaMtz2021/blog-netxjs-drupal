@@ -15,7 +15,7 @@ export default function StoreProvider({
   
   if (!storeRef.current) {
     storeRef.current = makeStore()
-    storeRef.current.dispatch(fetchArticles())
+    storeRef.current.dispatch(fetchArticles()) 
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>
