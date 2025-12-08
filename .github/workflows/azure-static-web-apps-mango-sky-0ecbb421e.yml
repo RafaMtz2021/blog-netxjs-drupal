@@ -17,11 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # 🔧 Agregar build local
+      # 🔧 Build con la variable de entorno correcta
       - name: Install and Build
+        env:
+          NEXT_PUBLIC_DRUPAL_BASE_URL: https://dev-rafael-martinez-demo.pantheonsite.io
         run: |
           npm install
-          npm run build   # Debe generar la carpeta /out
+          npm run build
 
       - name: Build And Deploy
         id: builddeploy
@@ -34,13 +36,10 @@ jobs:
           api_location: ""
           output_location: ""
           skip_app_build: true
-        env:
-          NEXT_PUBLIC_DRUPAL_BASE_URL: https://dev-rafael-martinez-demo.pantheonsite.io
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    name: Close Pull Request Job
     steps:
       - name: Close Pull Request
         id: closepullrequest
